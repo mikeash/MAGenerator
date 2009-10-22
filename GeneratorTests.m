@@ -47,6 +47,8 @@ GENERATOR(NSArray *, ArrayBuilder(void), (id obj))
     GENERATOR_END
 }
 
+GENERATOR_DECL(NSString *, WordParser(void), (unichar ch));
+
 GENERATOR(NSString *, WordParser(void), (unichar ch))
 {
     NSMutableString *buffer = [NSMutableString string];
@@ -66,6 +68,19 @@ GENERATOR(NSString *, WordParser(void), (unichar ch))
                 GENERATOR_YIELD((NSString *)nil);
             }
         }
+    }
+    GENERATOR_END
+}
+
+GENERATOR(int, Counter(int start, int end), (void))
+{
+    __block int n;
+    GENERATOR_BEGIN(void)
+    {
+        for(n = start; n <= end; n++)
+            GENERATOR_YIELD(n);
+        for(;;)
+            GENERATOR_YIELD(-1);
     }
     GENERATOR_END
 }
@@ -99,6 +114,10 @@ int main(int argc, char **argv)
     NSLog(@"%@", wordParser('d'));
     NSLog(@"%@", wordParser('!'));
     NSLog(@"%@", wordParser(0));
+    
+    int (^counter)(void) = Counter(5, 10);
+    for(int i = 0; i < 10; i++)
+        NSLog(@"%d", counter());
     
     [pool release];
     
