@@ -120,7 +120,7 @@
             return GENERATOR_zeroReturnValue; \
         }; \
         if(GENERATOR_cleanupBlock) \
-            [GENERATOR_cleanupArray addObject: [^{ GENERATOR_cleanupBlock(); } copy]]; \
+            [GENERATOR_cleanupArray addObject: ^{ GENERATOR_cleanupBlock(); }]; \
         return [[GENERATOR_mainBlock copy] autorelease]; \
     }
 

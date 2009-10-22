@@ -8,6 +8,12 @@
 #import "MAGenerator.h"
 
 
+static const void *CopyCleanupBlock(CFAllocatorRef allocator, const void *value)
+{
+    void (^block)(void) = (void (^)(void))value;
+    return [block copy];
+}
+
 static void CallCleanupBlockAndRelease(CFAllocatorRef allocator, const void *value)
 {
     if(value)
@@ -20,7 +26,7 @@ static void CallCleanupBlockAndRelease(CFAllocatorRef allocator, const void *val
 
 static CFArrayCallBacks gCleanupCallbacks = {
     0, // version
-    NULL, // retain
+    CopyCleanupBlock, // retain
     CallCleanupBlockAndRelease, // release
     NULL, // description
     NULL // equal
