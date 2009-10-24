@@ -100,6 +100,24 @@ GENERATOR(id, FileFinder(NSString *path, NSString *extension), (void))
     GENERATOR_END
 }
 
+GENERATOR(int, RLEDecoder(void (^emit)(char)), (unsigned char byte))
+{
+    __block unsigned char count;
+    GENERATOR_BEGIN(unsigned char byte)
+    {
+        while(1)
+        {
+            count = byte;
+            GENERATOR_YIELD(0);
+            
+            while(count--)
+                emit(byte);
+            GENERATOR_YIELD(0);
+        }
+    }
+    GENERATOR_END
+}
+
 void AppendByte(NSMutableData *data, char byte)
 {
     [data appendBytes: &byte length: 1];
@@ -291,6 +309,16 @@ int main(int argc, char **argv)
         if(++i >= 10)
             break;
     }
+    
+    NSMutableData *data = [NSMutableData data];
+    int (^rleDecoder)(unsigned char) = RLEDecoder(^(char byte) { [data appendBytes: &byte length: 1]; });
+    rleDecoder(3);
+    rleDecoder('a');
+    rleDecoder(1);
+    rleDecoder('X');
+    rleDecoder(5);
+    rleDecoder('0');
+    NSLog(@"%@", data);
     
     [pool release];
     
