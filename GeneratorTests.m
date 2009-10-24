@@ -151,6 +151,9 @@ GENERATOR(int, HTTPParser(void (^responseCallback)(NSString *), void (^headerCal
             GENERATOR_YIELD(0); // eat the \n
             
             NSString *headerString = SafeUTF8String(currentHeaderData);
+            
+            [currentHeaderData release];
+            
             if([headerString length])
             {
                 NSUInteger colonLoc = [headerString rangeOfString: @": "].location;
