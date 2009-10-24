@@ -121,11 +121,13 @@ GENERATOR(int, HTTPParser(void (^responseCallback)(NSString *), void (^headerCal
     
     NSMutableDictionary *headers = [NSMutableDictionary dictionary];
     __block NSMutableData *currentHeaderData = nil;
+    __block NSString *currentHeaderKey = nil;
     
     NSMutableData *bodyData = [NSMutableData data];
     
     GENERATOR_BEGIN(char byte)
     {
+        // read response line
         while(byte != '\r')
         {
             AppendByte(responseData, byte);
@@ -137,35 +139,51 @@ GENERATOR(int, HTTPParser(void (^responseCallback)(NSString *), void (^headerCal
             errorCallback(@"bad CRLF after response line");
         GENERATOR_YIELD(0); // eat the \n
         
+        // read headers
         while(1)
         {
             currentHeaderData = [[NSMutableData alloc] init];
-            while(byte != '\r')
+            while(byte != ':' && byte != '\r')
             {
                 AppendByte(currentHeaderData, byte);
                 GENERATOR_YIELD(0);
+            }
+            
+            // empty line means we're done with headers
+            if(byte == '\r' && [currentHeaderData length] == 0)
+                break;
+            else if(byte == '\r')
+                errorCallback(@"No colon found in header line");
+            else
+            {
+                GENERATOR_YIELD(0);
+                if(byte == ' ')
+                    GENERATOR_YIELD(0);
+                
+                currentHeaderKey = [SafeUTF8String(currentHeaderData) copy];
+                [currentHeaderData release];
+                
+                currentHeaderData = [[NSMutableData alloc] init];
+                while(byte != '\r')
+                {
+                    AppendByte(currentHeaderData, byte);
+                    GENERATOR_YIELD(0);
+                }
+                
+                NSString *currentHeaderValue = SafeUTF8String(currentHeaderData);
+                [currentHeaderData release];
+                
+                [headers setObject: currentHeaderValue forKey: currentHeaderKey];
+                [currentHeaderKey release];
             }
             GENERATOR_YIELD(0);
             if(byte != '\n')
                 errorCallback(@"bad CRLF after header line");
             GENERATOR_YIELD(0); // eat the \n
-            
-            NSString *headerString = SafeUTF8String(currentHeaderData);
-            
-            [currentHeaderData release];
-            
-            if([headerString length])
-            {
-                NSUInteger colonLoc = [headerString rangeOfString: @": "].location;
-                if(colonLoc == NSNotFound)
-                    errorCallback(@"No colon found in header line");
-                [headers setObject: [headerString substringFromIndex: colonLoc + 2] forKey: [headerString substringToIndex: colonLoc]];
-            }
-            else
-                break;
         }
         headerCallback(headers);
         
+        // read body
         while(byte != -1)
         {
             AppendByte(bodyData, byte);
@@ -176,6 +194,7 @@ GENERATOR(int, HTTPParser(void (^responseCallback)(NSString *), void (^headerCal
     GENERATOR_CLEANUP
     {
         [currentHeaderData release];
+        [currentHeaderKey release];
     }
     GENERATOR_END
 }
