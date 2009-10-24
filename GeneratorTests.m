@@ -85,6 +85,21 @@ GENERATOR(int, Counter(int start, int end), (void))
     GENERATOR_END
 }
 
+GENERATOR(id, FileFinder(NSString *path, NSString *extension), (void))
+{
+    NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtPath: path];
+    __block NSString *subpath;
+    GENERATOR_BEGIN(void)
+    {
+        while((subpath = [enumerator nextObject]))
+        {
+            if([[subpath pathExtension] isEqualToString: extension])
+                GENERATOR_YIELD((id)[path stringByAppendingPathComponent: subpath]);
+        }
+    }
+    GENERATOR_END
+}
+
 void AppendByte(NSMutableData *data, char byte)
 {
     [data appendBytes: &byte length: 1];
@@ -246,6 +261,14 @@ int main(int argc, char **argv)
     int (^counter)(void) = Counter(5, 10);
     for(int i = 0; i < 10; i++)
         NSLog(@"%d", counter());
+    
+    int i = 0;
+    for(NSString *path in MAGeneratorEnumerator(FileFinder(@"/Applications", @"app")))
+    {
+        NSLog(@"%@", path);
+        if(++i >= 10)
+            break;
+    }
     
     [pool release];
     

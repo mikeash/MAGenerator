@@ -127,3 +127,4 @@
 
 
 NSMutableArray *MAGeneratorMakeCleanupArray(void);
+id <NSFastEnumeration> MAGeneratorEnumerator(id (^generator)(void));

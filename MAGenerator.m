@@ -37,3 +37,39 @@ NSMutableArray *MAGeneratorMakeCleanupArray(void)
     CFMutableArrayRef array = CFArrayCreateMutable(NULL, 1, &gCleanupCallbacks);
     return [NSMakeCollectable(array) autorelease];
 }
+
+
+@interface _MAGeneratorEnumerator : NSEnumerator
+{
+    id (^_generator)(void);
+}
+- (id)initWithGenerator: (id (^)(void))generator;
+@end
+
+@implementation _MAGeneratorEnumerator
+
+- (id)initWithGenerator: (id (^)(void))generator
+{
+    if((self = [self init]))
+        _generator = [generator copy];
+    return self;
+}
+
+- (void)dealloc
+{
+    [_generator release];
+    [super dealloc];
+}
+
+- (id)nextObject
+{
+    return _generator();
+}
+
+@end
+
+
+id <NSFastEnumeration> MAGeneratorEnumerator(id (^generator)(void))
+{
+    return [[[_MAGeneratorEnumerator alloc] initWithGenerator: generator] autorelease];
+}
