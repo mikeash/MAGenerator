@@ -30,6 +30,7 @@
 		C2A364741090011B00A1872C /* MAGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAGenerator.h; sourceTree = "<group>"; };
 		C2A364751090011B00A1872C /* MAGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAGenerator.m; sourceTree = "<group>"; };
 		C2A3649A1090095D00A1872C /* GeneratorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratorTests.m; sourceTree = "<group>"; };
+		C2A368261093AA8800A1872C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +62,7 @@
 				C2A364741090011B00A1872C /* MAGenerator.h */,
 				C2A364751090011B00A1872C /* MAGenerator.m */,
 				C2A3649A1090095D00A1872C /* GeneratorTests.m */,
+				C2A368261093AA8800A1872C /* LICENSE */,
 			);
 			name = Source;
 			sourceTree = "<group>";
