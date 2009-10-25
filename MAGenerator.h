@@ -111,12 +111,14 @@
 
 #define GENERATOR_CLEANUP \
             } \
+            GENERATOR_where = -1; \
             return GENERATOR_zeroReturnValue; \
         }; \
         GENERATOR_cleanupBlock = ^{{
         
 #define GENERATOR_END \
             } \
+            GENERATOR_where = -1; \
             return GENERATOR_zeroReturnValue; \
         }; \
         if(GENERATOR_cleanupBlock) \
