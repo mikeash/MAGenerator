@@ -7,7 +7,7 @@
 
 #import "MAGenerator.h"
 
-
+GENERATOR_DECL(int, Primes(void), (void));
 GENERATOR(int, Primes(void), (void))
 {
     __block int n;
@@ -26,6 +26,7 @@ GENERATOR(int, Primes(void), (void))
     GENERATOR_END
 }
 
+GENERATOR_DECL(NSArray *, ArrayBuilder(void), (id obj));
 GENERATOR(NSArray *, ArrayBuilder(void), (id obj))
 {
     __block NSMutableArray *array = nil;
@@ -42,13 +43,11 @@ GENERATOR(NSArray *, ArrayBuilder(void), (id obj))
     GENERATOR_CLEANUP
     {
         NSLog(@"Cleaning up");
-        [array release];
     }
     GENERATOR_END
 }
 
 GENERATOR_DECL(NSString *, WordParser(void), (unichar ch));
-
 GENERATOR(NSString *, WordParser(void), (unichar ch))
 {
     NSMutableString *buffer = [NSMutableString string];
@@ -72,6 +71,7 @@ GENERATOR(NSString *, WordParser(void), (unichar ch))
     GENERATOR_END
 }
 
+GENERATOR_DECL(int, Counter(int start, int end), (void));
 GENERATOR(int, Counter(int start, int end), (void))
 {
     __block int n;
@@ -85,6 +85,7 @@ GENERATOR(int, Counter(int start, int end), (void))
     GENERATOR_END
 }
 
+GENERATOR_DECL(id, FileFinder(NSString *path, NSString *extension), (void));
 GENERATOR(id, FileFinder(NSString *path, NSString *extension), (void))
 {
     NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtPath: path];
@@ -100,6 +101,7 @@ GENERATOR(id, FileFinder(NSString *path, NSString *extension), (void))
     GENERATOR_END
 }
 
+GENERATOR_DECL(int, RLEDecoder(void (^emit)(char)), (unsigned char byte));
 GENERATOR(int, RLEDecoder(void (^emit)(char)), (unsigned char byte))
 {
     __block unsigned char count;
@@ -118,11 +120,13 @@ GENERATOR(int, RLEDecoder(void (^emit)(char)), (unsigned char byte))
     GENERATOR_END
 }
 
+static void AppendByte(NSMutableData *data, char byte);
 void AppendByte(NSMutableData *data, char byte)
 {
     [data appendBytes: &byte length: 1];
 }
 
+static NSString *SafeUTF8String(NSData *data);
 NSString *SafeUTF8String(NSData *data)
 {
     NSString *str = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
@@ -133,7 +137,10 @@ NSString *SafeUTF8String(NSData *data)
     return str;
 }
 
-GENERATOR(int, HTTPParser(void (^responseCallback)(NSString *), void (^headerCallback)(NSDictionary *), void (^bodyCallback)(NSData *), void (^errorCallback)(NSString *)), (int byte))
+GENERATOR_DECL(int, HTTPParser(void (^responseCallback)(NSString *), void (^headerCallback)(NSDictionary *),
+							   void (^bodyCallback)(NSData *), void (^errorCallback)(NSString *)), (int byte));
+GENERATOR(int, HTTPParser(void (^responseCallback)(NSString *), void (^headerCallback)(NSDictionary *),
+						  void (^bodyCallback)(NSData *), void (^errorCallback)(NSString *)), (int byte))
 {
     NSMutableData *responseData = [NSMutableData data];
     
@@ -179,7 +186,6 @@ GENERATOR(int, HTTPParser(void (^responseCallback)(NSString *), void (^headerCal
                     GENERATOR_YIELD(0);
                 
                 currentHeaderKey = [SafeUTF8String(currentHeaderData) copy];
-                [currentHeaderData release];
                 
                 currentHeaderData = [[NSMutableData alloc] init];
                 while(byte != '\r')
@@ -189,10 +195,8 @@ GENERATOR(int, HTTPParser(void (^responseCallback)(NSString *), void (^headerCal
                 }
                 
                 NSString *currentHeaderValue = SafeUTF8String(currentHeaderData);
-                [currentHeaderData release];
                 
                 [headers setObject: currentHeaderValue forKey: currentHeaderKey];
-                [currentHeaderKey release];
             }
             GENERATOR_YIELD(0);
             if(byte != '\n')
@@ -211,12 +215,11 @@ GENERATOR(int, HTTPParser(void (^responseCallback)(NSString *), void (^headerCal
     }
     GENERATOR_CLEANUP
     {
-        [currentHeaderData release];
-        [currentHeaderKey release];
     }
     GENERATOR_END
 }
 
+static void TestHTTP(void);
 void TestHTTP(void)
 {
     NSInputStream *is;
@@ -270,57 +273,57 @@ void TestHTTP(void)
 
 int main(int argc, char **argv)
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    int (^primes)(void) = Primes();
-    for(int i = 0; i < 10; i++)
-        NSLog(@"%d", primes());
-    
-    NSArray *(^builder)(id) = ArrayBuilder();
-    NSLog(@"%@", builder(@"hello"));
-    NSLog(@"%@", builder(@"world"));
-    NSLog(@"%@", builder(@"how"));
-    NSLog(@"%@", builder(@"are"));
-    NSLog(@"%@", builder(@"you?"));
-    
-    NSString *(^wordParser)(unichar ch) = WordParser();
-    NSLog(@"%@", wordParser('h'));
-    NSLog(@"%@", wordParser('e'));
-    NSLog(@"%@", wordParser('l'));
-    NSLog(@"%@", wordParser('l'));
-    NSLog(@"%@", wordParser('o'));
-    NSLog(@"%@", wordParser(' '));
-    NSLog(@"%@", wordParser('w'));
-    NSLog(@"%@", wordParser('o'));
-    NSLog(@"%@", wordParser('r'));
-    NSLog(@"%@", wordParser('l'));
-    NSLog(@"%@", wordParser('d'));
-    NSLog(@"%@", wordParser('!'));
-    NSLog(@"%@", wordParser(0));
-    
-    int (^counter)(void) = Counter(5, 10);
-    for(int i = 0; i < 10; i++)
-        NSLog(@"%d", counter());
-    
-    int i = 0;
-    for(NSString *path in MAGeneratorEnumerator(FileFinder(@"/Applications", @"app")))
-    {
-        NSLog(@"%@", path);
-        if(++i >= 10)
-            break;
-    }
-    
-    NSMutableData *data = [NSMutableData data];
-    int (^rleDecoder)(unsigned char) = RLEDecoder(^(char byte) { [data appendBytes: &byte length: 1]; });
-    rleDecoder(3);
-    rleDecoder('a');
-    rleDecoder(1);
-    rleDecoder('X');
-    rleDecoder(5);
-    rleDecoder('0');
-    NSLog(@"%@", data);
-    
-    [pool release];
-    
+	@autoreleasepool
+	{
+		int (^primes)(void) = Primes();
+		for(int i = 0; i < 10; i++)
+			NSLog(@"%d", primes());
+		
+		NSArray *(^builder)(id) = ArrayBuilder();
+		NSLog(@"%@", builder(@"hello"));
+		NSLog(@"%@", builder(@"world"));
+		NSLog(@"%@", builder(@"how"));
+		NSLog(@"%@", builder(@"are"));
+		NSLog(@"%@", builder(@"you?"));
+		
+		NSString *(^wordParser)(unichar ch) = WordParser();
+		NSLog(@"%@", wordParser('h'));
+		NSLog(@"%@", wordParser('e'));
+		NSLog(@"%@", wordParser('l'));
+		NSLog(@"%@", wordParser('l'));
+		NSLog(@"%@", wordParser('o'));
+		NSLog(@"%@", wordParser(' '));
+		NSLog(@"%@", wordParser('w'));
+		NSLog(@"%@", wordParser('o'));
+		NSLog(@"%@", wordParser('r'));
+		NSLog(@"%@", wordParser('l'));
+		NSLog(@"%@", wordParser('d'));
+		NSLog(@"%@", wordParser('!'));
+		NSLog(@"%@", wordParser(0));
+		
+		int (^counter)(void) = Counter(5, 10);
+		for(int i = 0; i < 10; i++)
+			NSLog(@"%d", counter());
+		
+		int i = 0;
+		for(NSString *path in MAGeneratorEnumerator(FileFinder(@"/Applications", @"app")))
+		{
+			NSLog(@"%@", path);
+			if(++i >= 10)
+				break;
+		}
+		
+		NSMutableData *data = [NSMutableData data];
+		int (^rleDecoder)(unsigned char) = RLEDecoder(^(char byte) { [data appendBytes: &byte length: 1]; });
+		rleDecoder(3);
+		rleDecoder('a');
+		rleDecoder(1);
+		rleDecoder('X');
+		rleDecoder(5);
+		rleDecoder('0');
+		NSLog(@"%@", data);
+		
+		TestHTTP();
+	}
     return 0;
 }

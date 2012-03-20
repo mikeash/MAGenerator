@@ -8,9 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
-		C2A364761090011B00A1872C /* MAGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A364751090011B00A1872C /* MAGenerator.m */; };
 		C2A3649B1090095D00A1872C /* GeneratorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A3649A1090095D00A1872C /* GeneratorTests.m */; };
+		FA6045BA151906A30026EB93 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6045B9151906A30026EB93 /* Cocoa.framework */; };
+		FA6045C8151906AD0026EB93 /* MAGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = C2A364741090011B00A1872C /* MAGenerator.h */; };
+		FA6045C9151906AD0026EB93 /* MAGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A364751090011B00A1872C /* MAGenerator.m */; };
+		FA6045DF151906EC0026EB93 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6045DE151906EC0026EB93 /* Foundation.framework */; };
+		FA6045E9151907250026EB93 /* MAGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = C2A364741090011B00A1872C /* MAGenerator.h */; };
+		FA6045EA151907250026EB93 /* MAGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A364751090011B00A1872C /* MAGenerator.m */; };
+		FA6045ED1519099B0026EB93 /* libMAGenerator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6045B7151906A30026EB93 /* libMAGenerator.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FA6045EB151909950026EB93 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA6045B6151906A30026EB93;
+			remoteInfo = "MAGenerator-MacOSX";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		8DD76F9E0486AA7600D96B5E /* CopyFiles */ = {
@@ -26,12 +42,19 @@
 
 /* Begin PBXFileReference section */
 		08FB779EFE84155DC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		8DD76FA10486AA7600D96B5E /* MAGenerator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MAGenerator; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DD76FA10486AA7600D96B5E /* MAGeneratorTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MAGeneratorTests; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2A364741090011B00A1872C /* MAGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAGenerator.h; sourceTree = "<group>"; };
 		C2A364751090011B00A1872C /* MAGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAGenerator.m; sourceTree = "<group>"; };
 		C2A3649A1090095D00A1872C /* GeneratorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratorTests.m; sourceTree = "<group>"; };
 		C2A368261093AA8800A1872C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		C2A368271093BFF000A1872C /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		C2A368271093BFF000A1872C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		FA6045B7151906A30026EB93 /* libMAGenerator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMAGenerator.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA6045B9151906A30026EB93 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		FA6045BC151906A30026EB93 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		FA6045BD151906A30026EB93 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		FA6045BE151906A30026EB93 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FA6045DD151906EC0026EB93 /* libMAGenerator-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMAGenerator-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA6045DE151906EC0026EB93 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,7 +62,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA6045ED1519099B0026EB93 /* libMAGenerator.a in Frameworks */,
 				8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA6045B4151906A30026EB93 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA6045BA151906A30026EB93 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA6045DA151906EC0026EB93 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA6045DF151906EC0026EB93 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +92,7 @@
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6859EA2029092E104C91782 /* Documentation */,
 				08FB779DFE84155DC02AAC07 /* External Frameworks and Libraries */,
+				FA6045B8151906A30026EB93 /* Frameworks */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
 			name = MAGenerator;
@@ -63,7 +104,7 @@
 				C2A364741090011B00A1872C /* MAGenerator.h */,
 				C2A364751090011B00A1872C /* MAGenerator.m */,
 				C2A3649A1090095D00A1872C /* GeneratorTests.m */,
-				C2A368271093BFF000A1872C /* README */,
+				C2A368271093BFF000A1872C /* README.md */,
 				C2A368261093AA8800A1872C /* LICENSE */,
 			);
 			name = Source;
@@ -80,7 +121,9 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8DD76FA10486AA7600D96B5E /* MAGenerator */,
+				8DD76FA10486AA7600D96B5E /* MAGeneratorTests */,
+				FA6045B7151906A30026EB93 /* libMAGenerator.a */,
+				FA6045DD151906EC0026EB93 /* libMAGenerator-iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -92,12 +135,51 @@
 			name = Documentation;
 			sourceTree = "<group>";
 		};
+		FA6045B8151906A30026EB93 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA6045B9151906A30026EB93 /* Cocoa.framework */,
+				FA6045DE151906EC0026EB93 /* Foundation.framework */,
+				FA6045BB151906A30026EB93 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA6045BB151906A30026EB93 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA6045BC151906A30026EB93 /* AppKit.framework */,
+				FA6045BD151906A30026EB93 /* CoreData.framework */,
+				FA6045BE151906A30026EB93 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		FA6045B5151906A30026EB93 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA6045C8151906AD0026EB93 /* MAGenerator.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA6045DB151906EC0026EB93 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA6045E9151907250026EB93 /* MAGenerator.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		8DD76F960486AA7600D96B5E /* MAGenerator */ = {
+		8DD76F960486AA7600D96B5E /* MAGeneratorTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1DEB927408733DD40010E9CD /* Build configuration list for PBXNativeTarget "MAGenerator" */;
+			buildConfigurationList = 1DEB927408733DD40010E9CD /* Build configuration list for PBXNativeTarget "MAGeneratorTests" */;
 			buildPhases = (
 				8DD76F990486AA7600D96B5E /* Sources */,
 				8DD76F9B0486AA7600D96B5E /* Frameworks */,
@@ -106,12 +188,47 @@
 			buildRules = (
 			);
 			dependencies = (
+				FA6045EC151909950026EB93 /* PBXTargetDependency */,
 			);
-			name = MAGenerator;
+			name = MAGeneratorTests;
 			productInstallPath = "$(HOME)/bin";
 			productName = MAGenerator;
-			productReference = 8DD76FA10486AA7600D96B5E /* MAGenerator */;
+			productReference = 8DD76FA10486AA7600D96B5E /* MAGeneratorTests */;
 			productType = "com.apple.product-type.tool";
+		};
+		FA6045B6151906A30026EB93 /* MAGenerator-MacOSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA6045C5151906A30026EB93 /* Build configuration list for PBXNativeTarget "MAGenerator-MacOSX" */;
+			buildPhases = (
+				FA6045B3151906A30026EB93 /* Sources */,
+				FA6045B4151906A30026EB93 /* Frameworks */,
+				FA6045B5151906A30026EB93 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MAGenerator-MacOSX";
+			productName = "MAGenerator-MacOSX";
+			productReference = FA6045B7151906A30026EB93 /* libMAGenerator.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		FA6045DC151906EC0026EB93 /* MAGenerator-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA6045E6151906EC0026EB93 /* Build configuration list for PBXNativeTarget "MAGenerator-iOS" */;
+			buildPhases = (
+				FA6045D9151906EC0026EB93 /* Sources */,
+				FA6045DA151906EC0026EB93 /* Frameworks */,
+				FA6045DB151906EC0026EB93 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MAGenerator-iOS";
+			productName = "MAGenerator-iOS";
+			productReference = FA6045DD151906EC0026EB93 /* libMAGenerator-iOS.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
@@ -120,12 +237,18 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB927808733DD40010E9CD /* Build configuration list for PBXProject "MAGenerator" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 08FB7794FE84155DC02AAC07 /* MAGenerator */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8DD76F960486AA7600D96B5E /* MAGenerator */,
+				FA6045B6151906A30026EB93 /* MAGenerator-MacOSX */,
+				FA6045DC151906EC0026EB93 /* MAGenerator-iOS */,
+				8DD76F960486AA7600D96B5E /* MAGeneratorTests */,
 			);
 		};
 /* End PBXProject section */
@@ -135,31 +258,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2A364761090011B00A1872C /* MAGenerator.m in Sources */,
 				C2A3649B1090095D00A1872C /* GeneratorTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA6045B3151906A30026EB93 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA6045C9151906AD0026EB93 /* MAGenerator.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA6045D9151906EC0026EB93 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA6045EA151907250026EB93 /* MAGenerator.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FA6045EC151909950026EB93 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FA6045B6151906A30026EB93 /* MAGenerator-MacOSX */;
+			targetProxy = FA6045EB151909950026EB93 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1DEB927508733DD40010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INSTALL_PATH = /usr/local/bin;
-				PRODUCT_NAME = MAGenerator;
-				WARNING_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused-parameter",
-				);
+				PRODUCT_NAME = MAGeneratorTests;
 			};
 			name = Debug;
 		};
@@ -167,16 +307,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INSTALL_PATH = /usr/local/bin;
-				PRODUCT_NAME = MAGenerator;
-				WARNING_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused-parameter",
-				);
+				PRODUCT_NAME = MAGeneratorTests;
 			};
 			name = Release;
 		};
@@ -184,13 +318,37 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_CW_ASM_SYNTAX = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_PASCAL_STRINGS = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
+					"NS_BLOCK_ASSERTIONS=1",
+					"NDEBUG=1",
+				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PREBINDING = NO;
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
+				WARNING_CFLAGS = (
+					"-W",
+					"-Wall",
+					"-Wextra",
+					"-Wno-unused-parameter",
+				);
 			};
 			name = Debug;
 		};
@@ -198,18 +356,101 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_CW_ASM_SYNTAX = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_PASCAL_STRINGS = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
+					"NS_BLOCK_ASSERTIONS=1",
+					"NDEBUG=1",
+				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				PREBINDING = NO;
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
+				WARNING_CFLAGS = (
+					"-W",
+					"-Wall",
+					"-Wextra",
+					"-Wno-unused-parameter",
+				);
+			};
+			name = Release;
+		};
+		FA6045C6151906A30026EB93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				PRODUCT_NAME = MAGenerator;
+			};
+			name = Debug;
+		};
+		FA6045C7151906A30026EB93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				PRODUCT_NAME = MAGenerator;
+			};
+			name = Release;
+		};
+		FA6045E7151906EC0026EB93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/MAGenerator_iOS.dst;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		FA6045E8151906EC0026EB93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/MAGenerator_iOS.dst;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1DEB927408733DD40010E9CD /* Build configuration list for PBXNativeTarget "MAGenerator" */ = {
+		1DEB927408733DD40010E9CD /* Build configuration list for PBXNativeTarget "MAGeneratorTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB927508733DD40010E9CD /* Debug */,
@@ -226,6 +467,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		FA6045C5151906A30026EB93 /* Build configuration list for PBXNativeTarget "MAGenerator-MacOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA6045C6151906A30026EB93 /* Debug */,
+				FA6045C7151906A30026EB93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		FA6045E6151906EC0026EB93 /* Build configuration list for PBXNativeTarget "MAGenerator-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA6045E7151906EC0026EB93 /* Debug */,
+				FA6045E8151906EC0026EB93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
