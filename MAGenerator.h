@@ -5,7 +5,7 @@
 //  Created by Michael Ash on 10/21/09.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 
 #define GENERATOR_DECL(returnType, nameAndCreationParams, perCallParams) \
@@ -48,7 +48,7 @@
         }; \
         if(GENERATOR_cleanupBlock) \
             [GENERATOR_cleanupArray addObject: ^{ GENERATOR_cleanupBlock(); }]; \
-        return [[GENERATOR_mainBlock copy] autorelease]; \
+        return [GENERATOR_mainBlock copy]; \
     }
 
 

@@ -10,17 +10,15 @@
 
 static const void *CopyCleanupBlock(CFAllocatorRef allocator, const void *value)
 {
-    void (^block)(void) = (void (^)(void))value;
-    return [block copy];
+    return Block_copy(value);
 }
 
 static void CallCleanupBlockAndRelease(CFAllocatorRef allocator, const void *value)
 {
     if(value)
     {
-        void (^block)(void) = (void (^)(void))value;
-        block();
-        [block release];
+        ((__bridge void (^)(void))value)();
+		Block_release(value);
     }
 }
 
@@ -35,7 +33,7 @@ static CFArrayCallBacks gCleanupCallbacks = {
 NSMutableArray *MAGeneratorMakeCleanupArray(void)
 {
     CFMutableArrayRef array = CFArrayCreateMutable(NULL, 1, &gCleanupCallbacks);
-    return [NSMakeCollectable(array) autorelease];
+    return CFBridgingRelease(array);
 }
 
 
@@ -55,12 +53,6 @@ NSMutableArray *MAGeneratorMakeCleanupArray(void)
     return self;
 }
 
-- (void)dealloc
-{
-    [_generator release];
-    [super dealloc];
-}
-
 - (id)nextObject
 {
     return _generator();
@@ -71,5 +63,5 @@ NSMutableArray *MAGeneratorMakeCleanupArray(void)
 
 id <NSFastEnumeration> MAGeneratorEnumerator(id (^generator)(void))
 {
-    return [[[_MAGeneratorEnumerator alloc] initWithGenerator: generator] autorelease];
+    return [[_MAGeneratorEnumerator alloc] initWithGenerator: generator];
 }
